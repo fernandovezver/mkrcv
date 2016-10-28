@@ -1,0 +1,339 @@
+<!--Hecho por:-->
+<!--Fernando Chávez Rivera-->
+<!--Andrés Ruiz Justo-->
+<!--Final -->
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!--Título de la página que aparece en la pestaña -->
+		<title>Curriculum online</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!--Diseño de los componentes externos -->
+		<link href="css/indexdesign.css" rel="stylesheet">
+		<!--Fuente para el título -->
+		<link href="https://fonts.googleapis.com/css?family=Suez+One" rel="stylesheet">
+		<!-- jQuery Version 1.11.1 -->
+		<<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="js/bootstrap.min.js"></script>
+		<!--script de drag and drop-->
+		<script src= "js/draganddrop.js"></script>
+		<!--script de add-->
+		<script src= "js/add.js"></script>
+		<script src="https://use.fontawesome.com/5ba74422f5.js"></script>
+		<!--Script para que funcionen los métodos de firebase -->
+		<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+		<!--Script autenticar firebase -->
+		<script type="text/javascript" src="/js/firebaseAuth.js"></script>
+		<!--Script para manipular firebase -->
+		<script type="text/javascript" src="/js/database.js"></script>
+
+		<!--Cerdadas de andrés -->
+		<script type="text/javascript">
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user == null) {
+					$(location).attr("href", "index.html");
+				} else {
+					loadDatabase();
+				}
+			})
+		</script>
+	</head>
+
+	<body>
+
+			<!-- Navigation -->
+			<nav class="navbar navbar-inverse navbar-fixed-top barrasup" role="navigation">
+					<div class="container" >
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+											<span class="sr-only">Toggle navigation</span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+									</button>
+									<a class="navbar-brand" href="#" id="boton">Curriculum online</a>
+							</div>
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+									<ul class="nav navbar-nav">
+											<li>
+													<a href="#" id="boton">Selecciona template</a>
+											</li>
+											<li>
+													<a href="https://mkrcv.wordpress.com/" id="boton">Acerca del proyecto</a>
+											</li>
+											<li>
+													<a href="#" id="boton">Contacto</a>
+											</li>
+									</ul>
+							</div>
+							<!-- /.navbar-collapse -->
+					</div>
+					<!-- /.container -->
+			</nav>
+
+			<!-- Page Content -->
+			<div class="container">
+
+					<div class="row">
+							<div class="col-lg-12 text-center">
+									<h1>Curriculum online</h1>
+									<button type="button" class="btn btn-default" id="signout" onclick="signOut()">Sign out</button>
+							</div>
+					</div>
+					<!-- /.row -->
+			</div>
+			<!-- /.container -->
+
+			<!--Datos de la persona -->
+			<div class="row">
+				<div class="col-md-4 imagen">
+					<img src="http://placehold.it/100x100">
+				</div>
+				<div class="col-md-8">
+					<div id="name" class="row data">Name</div>
+					<div id="email" class="row data">Email</div>
+					<div id="phone" class="row data">Phone</div>
+					<div id="address1" class="row data">Address 1</div>
+					<div id="address2" class="row data">Address 2</div>
+				</div>
+			</div>
+			<br>
+			<!--Dos columnas principales -->
+			<div class="row">
+				<!--Columna izquierda -->
+				<div class="col-md-6">
+					<!--
+					<div class="row data title"> Profile </div>
+					<div class="row data"> Nombre </div>
+					<p>Descripción</p>
+					<div class="row data"> Descripción </div>
+					<br>
+				-->
+					<!--Contenedor educación-->
+					<div class="row data title"> Education <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarEducacion">+</button></div>
+					<div id="contenedoreducacion">
+
+					</div>
+
+					<!--Contenedor Idiomas-->
+					<div class="row data title"> Languages  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarLenguaje">+</button></div>
+					<div id="contenedoridioma">
+
+					</div>
+					<!--<div class="row data">
+						<div class="col-xs-7 subtitle">Inglés</div>
+						<div class="col-xs-5">
+							<div class="progress backbar">
+								<div class="progress-bar barra" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
+									60%
+								</div>
+							</div>
+						</div>
+					</div>-->
+					<!--Contenedor educación-->
+					<div class="row data title"> Interests <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarIntereses">+</button> </div>
+					<div class="row data">
+						<div class="col-xs-4 categoria">Photography</div>
+						<div class="col-xs-4 categoria">Art</div>
+						<div class="col-xs-4 categoria">Programming</div>
+					</div>
+					<div class="row data">
+						<div class="col-xs-4 imagen icono"><span class="fa fa-camera" aria-hidden="true"></span></div>
+						<div class="col-xs-4 imagen icono"><span class="fa fa-paint-brush" aria-hidden="true"></div>
+						<div class="col-xs-4 imagen icono"><span class="fa fa-code" aria-hidden="true"></div>
+					</div>
+
+				</div>
+				<!--Columna derecha -->
+				<div class="col-md-6">
+					<!--Contenedor de extras-->
+					<div class="row data title"> Software  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarSoftware">+</button></div>
+					<div id="contenedorsoftware">
+						<div class="row data subtitle"> Photoshop </div>
+						<p>Description</p>
+						<div class="row data subtitle"> Illustrator </div>
+						<p>Description</p>
+						<div class="row data subtitle"> Kintos </div>
+						<p>Description</p>
+						<div class="row data subtitle"> Word </div>
+						<p>Description</p>
+					</div>
+					<!--Contenedor educación-->
+					<div class="row data title"> Work experience <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarTrabajo">+</button></div>
+					<div id="contenedortrabajos">
+						<div class="row data">
+							<div class="col-xs-7 subtitle">Oracle</div>
+							<div class="col-xs-5">Dates</div>
+						</div>
+						<p>Description</p>
+						<div class="row data">
+							<div class="col-xs-7 subtitle">Intel</div>
+							<div class="col-xs-5">Dates</div>
+						</div>
+						<p>Description</p>
+						<div class="row data">
+							<div class="col-xs-7 subtitle">IBM</div>
+							<div class="col-xs-5">Dates</div>
+						</div>
+						<p>Description</p>
+						<div class="row data">
+							<div class="col-xs-7 subtitle">Continental</div>
+							<div class="col-xs-5">Dates</div>
+						</div>
+						<p>Description</p>
+					</div>
+				</div>
+			</div>
+			<br>
+
+
+			<!-- Agregar nueva educación -->
+			<div class="modal fade " id="AgregarEducacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Add education</h4>
+								</div>
+								<form>
+									<div class="modal-body">
+
+										<input type="text" id="eName" name="EName" class="form-control" style="text-align:center;" placeholder="Degree" required >
+										<br>
+										<input type="text" id="eStart" name="EStart" class="form-control datepicker" style="text-align:center;" placeholder="Start date" required >
+										<br>
+										<input type="text" id="eFinish" name="EFinish" class="form-control datepicker" style="text-align:center;" placeholder="Finish date" required >
+										<br>
+										<input type="text" id="eHonors" name="EHonors" class="form-control" style="text-align:center;" placeholder="Honors" required >
+									</div>
+									<div class="modal-footer" style="border-top:white; border-buttom:white;">
+										<button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+										<input type="submit" class="btn btn-primary " value="Add" onclick="addEducation()" data-dismiss="modal">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Agregar nuevo lenguaje -->
+				<div class="modal fade " id="AgregarLenguaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Add Language</h4>
+									</div>
+									<form>
+										<div class="modal-body">
+											<div class="dropdown ">
+											<button id="lLanguage" class="btn btn-primary dropdown-toggle dropteam" type="button" data-toggle="dropdown">Language<span class="caret"></span></button>
+												<ul class="dropdown-menu menunuevo">
+													<li ><a href="#">Spanish</a></li>
+													<li ><a href="#">English</a></li>
+													<li ><a href="#">Italian</a></li>
+												</ul>
+											</div>
+											<br>
+											<input type="text" id="lLevel" name="LLevel" class="form-control" style="text-align:center;" placeholder="Level" required >
+										</div>
+										<div class="modal-footer" style="border-top:white; border-buttom:white;">
+											<button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+											<input type="submit" class="btn btn-primary " value="Add" onclick="addLanguage()" data-dismiss="modal">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Agregar nuevos intereses -->
+					<div class="modal fade " id="AgregarIntereses" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">Add Interests</h4>
+										</div>
+										<form>
+											<div class="modal-body">
+												<input type="text" id="IName" name="IName" class="form-control" style="text-align:center;" placeholder="Interest" required >
+												<br>
+												<input type="text" id="IImage" name="IImage" class="form-control" style="text-align:center;" placeholder="Image" required >
+											</div>
+											<div class="modal-footer" style="border-top:white; border-buttom:white;">
+												<button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+												<input type="submit" class="btn btn-primary " value="Add">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Agregar nuevo software -->
+						<div class="modal fade " id="AgregarSoftware" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Add software</h4>
+											</div>
+											<form>
+												<div class="modal-body">
+													<input type="text" id="sName" name="SName" class="form-control" style="text-align:center;" placeholder="Software" required >
+													<br>
+													<input type="text" id="sExperience" name="SExp" class="form-control" style="text-align:center;" placeholder="Experience (Years)" required >
+												</div>
+												<div class="modal-footer" style="border-top:white; border-buttom:white;">
+													<button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+													<input type="submit" class="btn btn-primary " value="Add" onclick="addSoftware()" data-dismiss="modal">
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Agregar experiencia de trabajos -->
+							<div class="modal fade " id="AgregarTrabajo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title" id="myModalLabel">Add work experience</h4>
+												</div>
+												<form>
+													<div class="modal-body">
+														<input type="text" id="wCompany" name="WCompany" class="form-control" style="text-align:center;" placeholder="Company" required >
+														<br>
+														<input type="text" id="wStart" name="WStart" class="form-control datepicker" style="text-align:center;" placeholder="Start date" required >
+														<br>
+														<input type="text" id="wFinish" name="WFinish" class="form-control datepicker" style="text-align:center;" placeholder="Finish date" required >
+														<br>
+														<input type="text" id="wTitle" name="WTitle" class="form-control" style="text-align:center;" placeholder="Title" required >
+													</div>
+													<div class="modal-footer" style="border-top:white; border-buttom:white;">
+														<button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+														<input type="submit" class="btn btn-primary " value="Add" onclick="addWork()" data-dismiss="modal">
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+	</body>
+
+</html>

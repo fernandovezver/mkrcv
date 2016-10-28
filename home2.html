@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MkrCV</title>
+
+		<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+		<script type="text/javascript" src="/js/firebaseAuth.js"></script>
+		<!--<script type="text/javascript" src="/javascripts/firebase.js"></script>-->
+
+		<script type="text/javascript">
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user == null) {
+					$(location).attr("href", "index.html");
+				} else {
+					firebase.database().ref('/users/' + uid).once('value')
+						.then(function(snapshot) {
+				  		console.log(snapshot.val().Nombre);
+					});
+				}
+			})
+		</script>
+	</head>
+
+	<body>
+		<h1>MkrCV Home</h1>
+		<button id="signOut" type="submit" onclick="signOut()">Sign out</button>
+	</body>
+</html>
