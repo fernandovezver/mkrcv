@@ -16,11 +16,3 @@ $( "#agregaridioma" ).click(function() {
 $( "#agregartrabajos" ).click(function() {
  $("#contenedortrabajos").append('<div class="row data"><div class="col-xs-7 subtitle">Oracle</div><div class="col-xs-5">Fechas</div></div><p>Descripción</p>');
 });
-
-$(function() {
-  $( ".datepicker" ).datepicker({
-    inline: true,
-    showOtherMonths: true,
-    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    dateFormat: "yy-mm-dd" });
-});

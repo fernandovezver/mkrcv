@@ -1,7 +1,6 @@
 <!--Hecho por:-->
 <!--Fernando Chávez Rivera-->
 <!--Andrés Ruiz Justo-->
-<!--Final -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,8 +19,7 @@
 		<!--Fuente para el título -->
 		<link href="https://fonts.googleapis.com/css?family=Suez+One" rel="stylesheet">
 		<!-- jQuery Version 1.11.1 -->
-		<<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="js/jquery.js"></script>
 		<!-- Bootstrap Core JavaScript -->
 		<script src="js/bootstrap.min.js"></script>
 		<!--script de drag and drop-->
@@ -31,6 +29,8 @@
 		<script src="https://use.fontawesome.com/5ba74422f5.js"></script>
 		<!--Script para que funcionen los métodos de firebase -->
 		<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+		<!--Importar JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<!--Script autenticar firebase -->
 		<script type="text/javascript" src="/js/firebaseAuth.js"></script>
 		<!--Script para manipular firebase -->
@@ -123,13 +123,13 @@
 					<!--Contenedor educación-->
 					<div class="row data title"> Education <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarEducacion">+</button></div>
 					<div id="contenedoreducacion">
-
+						
 					</div>
 
 					<!--Contenedor Idiomas-->
 					<div class="row data title"> Languages  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarLenguaje">+</button></div>
 					<div id="contenedoridioma">
-
+						
 					</div>
 					<!--<div class="row data">
 						<div class="col-xs-7 subtitle">Inglés</div>
@@ -141,7 +141,7 @@
 							</div>
 						</div>
 					</div>-->
-					<!--Contenedor educación-->
+					<!--Contenedor interests-->
 					<div class="row data title"> Interests <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarIntereses">+</button> </div>
 					<div class="row data">
 						<div class="col-xs-4 categoria">Photography</div>
@@ -160,38 +160,11 @@
 					<!--Contenedor de extras-->
 					<div class="row data title"> Software  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarSoftware">+</button></div>
 					<div id="contenedorsoftware">
-						<div class="row data subtitle"> Photoshop </div>
-						<p>Description</p>
-						<div class="row data subtitle"> Illustrator </div>
-						<p>Description</p>
-						<div class="row data subtitle"> Kintos </div>
-						<p>Description</p>
-						<div class="row data subtitle"> Word </div>
-						<p>Description</p>
 					</div>
 					<!--Contenedor educación-->
 					<div class="row data title"> Work experience <button type="button" class="btn btn-default" data-toggle="modal" data-target="#AgregarTrabajo">+</button></div>
 					<div id="contenedortrabajos">
-						<div class="row data">
-							<div class="col-xs-7 subtitle">Oracle</div>
-							<div class="col-xs-5">Dates</div>
-						</div>
-						<p>Description</p>
-						<div class="row data">
-							<div class="col-xs-7 subtitle">Intel</div>
-							<div class="col-xs-5">Dates</div>
-						</div>
-						<p>Description</p>
-						<div class="row data">
-							<div class="col-xs-7 subtitle">IBM</div>
-							<div class="col-xs-5">Dates</div>
-						</div>
-						<p>Description</p>
-						<div class="row data">
-							<div class="col-xs-7 subtitle">Continental</div>
-							<div class="col-xs-5">Dates</div>
-						</div>
-						<p>Description</p>
+						
 					</div>
 				</div>
 			</div>
@@ -211,9 +184,9 @@
 
 										<input type="text" id="eName" name="EName" class="form-control" style="text-align:center;" placeholder="Degree" required >
 										<br>
-										<input type="text" id="eStart" name="EStart" class="form-control datepicker" style="text-align:center;" placeholder="Start date" required >
+										<input type="text" id="eStart" name="EStart" class="form-control" style="text-align:center;" placeholder="Start date" required >
 										<br>
-										<input type="text" id="eFinish" name="EFinish" class="form-control datepicker" style="text-align:center;" placeholder="Finish date" required >
+										<input type="text" id="eFinish" name="EFinish" class="form-control" style="text-align:center;" placeholder="Finish date" required >
 										<br>
 										<input type="text" id="eHonors" name="EHonors" class="form-control" style="text-align:center;" placeholder="Honors" required >
 									</div>
@@ -237,13 +210,15 @@
 									</div>
 									<form>
 										<div class="modal-body">
-											<select class="dropteam menunuevo">
-  											<option value="English">English</option>
-  											<option value="Spanish">Spanish</option>
-  											<option value="Italian">Italian</option>
-  											<option value="French">French</option>
-											</select>
-											<br>
+											<div class="dropdown ">
+												<select id="lLanguage" class="dropteam menunuevo" placeholder="Language">
+  												<option value="" disabled selected>Language</option>
+  												<option value="English">English</option>
+  												<option value="Spanish">Spanish</option>
+  												<option value="Italian">Italian</option>
+  												<option value="French">French</option>
+												</select>
+											</div>
 											<br>
 											<input type="text" id="lLevel" name="LLevel" class="form-control" style="text-align:center;" placeholder="Level" required >
 										</div>
@@ -318,9 +293,9 @@
 													<div class="modal-body">
 														<input type="text" id="wCompany" name="WCompany" class="form-control" style="text-align:center;" placeholder="Company" required >
 														<br>
-														<input type="text" id="wStart" name="WStart" class="form-control datepicker" style="text-align:center;" placeholder="Start date" required >
+														<input type="text" id="wStart" name="WStart" class="form-control" style="text-align:center;" placeholder="Start date" required >
 														<br>
-														<input type="text" id="wFinish" name="WFinish" class="form-control datepicker" style="text-align:center;" placeholder="Finish date" required >
+														<input type="text" id="wFinish" name="WFinish" class="form-control" style="text-align:center;" placeholder="Finish date" required >
 														<br>
 														<input type="text" id="wTitle" name="WTitle" class="form-control" style="text-align:center;" placeholder="Title" required >
 													</div>

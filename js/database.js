@@ -5,6 +5,7 @@ function addEducation() {
 		finish: $("#eFinish").val(),
 		honors: $("#eHonors").val()
 	});
+	loadDatabase();
 }
 
 function addLanguage() {
@@ -12,6 +13,7 @@ function addLanguage() {
 		language: $("#lLanguage").val(),
 		level: $("#lLevel").val()
 	});
+	loadDatabase();
 }
 
 function addSoftware() {
@@ -19,6 +21,7 @@ function addSoftware() {
 		name: $("#sName").val(),
 		experience: $("#sExperience").val()
 	});
+	loadDatabase();
 }
 
 function addWork() {
@@ -28,12 +31,25 @@ function addWork() {
 		finish: $("#wFinish").val(),
 		title: $("#wTitle").val()
 	});
+	loadDatabase();
 }
 
 function loadDatabase() {
 	firebase.database().ref("users/" + firebase.auth().currentUser.uid).once("value")
 		.then(function(snapshot) {
+		/* Load profile */
+		var profile = snapshot.child("profile");
+		$("#name").html(profile.child("name").val() + " " + profile.child("lastname").val());
+		$("#email").html(profile.child("email").val());
+		$("#phone").html(profile.child("phone").val());
+		$("#address1").html(profile.child("address1").val());
+		$("#address2").html(profile.child("address2").child("city").val() +
+			", " + profile.child("address2").child("state").val() +
+			", " + profile.child("address2").child("country").val());
+	
+
 		/* Load education information */
+		$("#contenedoreducacion").html("");
 		snapshot.child("education").forEach(function(childSnapshot) {
 			$("#contenedoreducacion").append(
 			'<div class="row data">' +
@@ -45,7 +61,8 @@ function loadDatabase() {
 			)
 		});
 
-		/* Load Languages information */
+		/* Load languages information */
+		$("#contenedoridioma").html("");
 		snapshot.child("languages").forEach(function(childSnapshot) {
 			$("#contenedoridioma").append(
 			'<div class="row data">' +
@@ -60,22 +77,27 @@ function loadDatabase() {
 			'</div>'
 			)
 		});
+		
+		/* Load software information */
+		$("#contenedorsoftware").html("");
+		snapshot.child("software").forEach(function(childSnapshot) {
+			$("#contenedorsoftware").append(
+			'<div class="row data subtitle">' + childSnapshot.child("name").val() + '</div>' +
+				'<p>' + childSnapshot.child("experience").val() + '</p>'
+			)
+		});
+
+		/* Load work information */
+		$("#contenedortrabajos").html("");
+		snapshot.child("work").forEach(function(childSnapshot) {
+			$("#contenedortrabajos").append(
+			'<div class="row data">' +
+				'<div class="col-xs-7 subtitle">' + childSnapshot.child("company").val() + '</div>' +
+				'<div class="col-xs-5">' + childSnapshot.child("start").val() + '</div>' +
+				'<div class="col-xs-5">' + childSnapshot.child("finish").val() + '</div>' +
+			'</div>' +
+			'<p>' + childSnapshot.child("title").val() + '</p>'
+			)
+		});
 	});
 }
-
-/*
-firebase.auth().onAuthStateChanged(function(user) {
-				if (user == null) {
-					$(location).attr("href", "index.html");
-				} else {
-					firebase.database().ref('/users/' + user.uid).once('value')
-						.then(function(snapshot) {
-						document.getElementById("name").innerHTML = (snapshot.val().profile.name + " " + snapshot.val().profile.lastname);
-						document.getElementById("email").innerHTML = (snapshot.val().profile.email);
-						document.getElementById("phone").innerHTML = (snapshot.val().profile.phone);
-						document.getElementById("address1").innerHTML = (snapshot.val().profile.address1);
-						document.getElementById("address2").innerHTML = (snapshot.val().profile.address2.city + ", " + snapshot.val().profile.address2.state + ", " + snapshot.val().profile.address2.country);
-					});
-				}
-			})
-*/
