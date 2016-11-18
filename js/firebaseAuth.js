@@ -13,8 +13,8 @@ var firebaseApp = firebase.initializeApp(config);
 var database = firebase.database();
 
 function signUp() {
-	var email = document.getElementById("email").value;
-	var password = document.getElementById("password").value;
+	var email = document.getElementById("email2").value;
+	var password = document.getElementById("password2").value;
 	
 	firebase.auth().createUserWithEmailAndPassword(email, password)
 		.then(function(user) {
@@ -73,17 +73,17 @@ function signOut() {
 function createUserInDb(user) {
 	console.log(user.uid);
 	database.ref("users").child(user.uid).child("profile").set({
-		name: "First name and middle names",
-		lastname: "Last name(s)",
-		email: "Email",
-		phone: "Phone",
-		address1: "Address"
+		name: $("#fname").val(),
+		lastname: $("#lname").val(),
+		email: $("#email2").val(),
+		phone: $("#phone").val(),
+		address1: $("#address").val()
 	});
 
 	database.ref("users").child(user.uid).child("profile").child("address2").set({
-		city: "City",
-		state: "State",
-		country: "Country"
+		city: $("#city").val(),
+		state: $("#state").val(),
+		country: $("#country").val()
 	});
 }
 

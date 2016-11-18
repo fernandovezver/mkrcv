@@ -1,52 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MkrCV</title>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>MkrCV</title>
 
 		<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 		<script type="text/javascript" src="/js/firebaseAuth.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!--Diseño de los componentes externos -->
-    <link href="css/indexdesign.css" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!--Diseño de los componentes externos -->
+		<link href="css/indexdesign.css" rel="stylesheet">
+		<link href="css/login.css" rel="stylesheet">
 
-    <script type="text/javascript">
+		<script type="text/javascript">
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user != null) {
 					$(location).attr("href", "home.html");
 				}
 			})
 		</script>
-  </head>
+	</head>
 
 
-  <body class ="fondo">
-    <div class="row">
-      <div class="col-md-offset-4 col-md-4">
-        <div class="thumbnail" style="padding: 15px; ">
-          <h3 class="login">Welcome to MkrCv</h3>
-          <center>
-            <img src="img/MkrCV.png" style="width:25%;">
-          </center>
-          <br>
-          <input type="text" id="email" name="Username" class="form-control" placeholder="Email" required>
-          <br>
-          <input type="password" id="password" name="Password" class="form-control" placeholder="Password" required>
-          <br>
-          <button id="signIn" type="submit" class="btn btn-default" onclick="signIn()" style="width: 100%;">Sign in</button>
-          <br>
-          <br>
-    			<button id="signUp" type="submit" class="btn btn-default" onclick="signUp()" style="width: 100%;">Sign up</button>
-          <br>
-          <br>
-    			<button id="googleLogIn" type="submit" class="btn btn-default" onclick="googleLogIn()" style="width: 100%;">Log in with Google</button>
-        </div>
-      </div>
-    </div>
-  </body>
+	<body class ="fondo">
+		<div class="row">
+			<div class="col-md-offset-4 col-md-4">
+				<div class="thumbnail" style="padding: 15px; ">
+					<h3 class="login">Welcome to MkrCv</h3>
+					<center>
+						<img src="img/MkrCV.png" style="width:25%;">
+					</center>
+					<br>
+					<div id="singIn-container">
+						<form id="signInForm" action="javascript:signIn()">
+							<input type="email" id="email" name="Username" class="form-control" placeholder="Email" required>
+							<br>
+							<input type="password" id="password" name="Password" class="form-control" placeholder="Password" required>
+							<br>
+							<button id="signIn" type="submit" class="btn btn-default" style="width: 100%;"> Sign in </button>
+						</form>
+					</div>
+					<br>
+					<br>
+					<div id="singIn-container">
+						<form id="signUpForm" action="javascript:signUp()">
+							<input type="text" id="fname" name="Fname" class="form-control" placeholder="First and middle names" required>
+							<br>
+							<input type="text" id="lname" name="Lname" class="form-control" placeholder="Last name(s)" required>
+							<br>
+							<input type="text" id="phone" name="Phone" class="form-control" placeholder="Phone" required>
+							<br>
+							<input type="text" id="address" name="Address" class="form-control" placeholder="Address" required>
+							<br>
+							<input type="text" id="city" name="City" class="form-control" placeholder="City" required>
+							<br>
+							<input type="text" id="state" name="State" class="form-control" placeholder="State" required>
+							<br>
+							<input type="text" id="country" name="Country" class="form-control" placeholder="Country" required>
+							<br>
+							<input type="email" id="email2" name="Username" class="form-control" placeholder="Email" required>
+							<br>
+							<input type="password" id="password2" name="Password" class="form-control" placeholder="Password" required>
+							<br>
+							<button id="signUp" type="submit" class="btn btn-default" style="width: 100%;">Sign up</button>
+						</form>
+					</div>
+					<br>
+					<br>
+					<button id="googleLogIn" type="submit" class="btn btn-default" onclick="googleLogIn()" style="width: 100%;">Log in with Google</button>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
